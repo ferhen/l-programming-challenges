@@ -1,0 +1,47 @@
+version: '3.4'
+
+services:
+  api:
+    build:
+      context: .
+      target: prod
+      # target: debug
+    expose:
+      - 5000
+    command: npm start
+    links:
+      - database
+      - cache
+    depends_on:
+      - database
+      - cache
+    restart: always
+    # ports:
+    #   - 9229:9229
+    # command: ts-node-dev --inspect=0.0.0.0:9229 ./dist/index.js
+
+  database:
+    image: mongo
+    container_name: mongo
+    command: mongod --port 27018
+    ports:
+      - 27018:27018
+    restart: always
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api
+    ports:
+      - 8080:4000
+    restart: always
+
+  cache:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - 6379:6379
