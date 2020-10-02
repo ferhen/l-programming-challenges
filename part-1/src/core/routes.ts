@@ -4,6 +4,8 @@ import { listProducts, insertProducts, deleteProducts } from './controller';
 
 const router = express.Router();
 
+router.use(express.json({ limit: '200mb' }));
+
 router.get('/', async (req, res, next) => {
     try {
         const result = await listProducts();

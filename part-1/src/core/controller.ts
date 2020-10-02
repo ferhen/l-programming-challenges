@@ -11,8 +11,9 @@ export const insertProducts = async (products: any | any[]) => {
         products = [products];
     }
     const objHash = hash(products);
-    if (await get(objHash))
+    if (await get(objHash)) {
         throw new Error('Duplicate value');
+    }
     await set(objHash, true);
     return await insertDocuments('products', products);
 }

@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  api:
+    build:
+      target: prod
+    command: npm start
+    restart: always
+    
+  database:
+    restart: always
+
+  nginx:
+    restart: always
+
+  cache:
+    restart: always
