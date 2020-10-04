@@ -3,5 +3,25 @@ version: '3.4'
 services:
   api:
     build:
-      target: debug
-    command: npm test
+      target: prod
+    logging: 
+      driver: none
+
+  api-tests:
+    build:
+      context: ./test/cluster
+    container_name: api-tests
+    depends_on:
+      - api
+
+  database:
+    logging: 
+      driver: none
+  
+  nginx:
+    logging: 
+      driver: none
+
+  cache:
+    logging: 
+      driver: none

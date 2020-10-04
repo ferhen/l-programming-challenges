@@ -1,7 +1,12 @@
 import request from 'supertest';
-import app from '../src/core/server';
-import { clearCache, shutdownCache } from '../src/core/cache';
-import { disconnect } from '../src/core/db';
+import app from '../../src/core/server';
+import { clearCache, shutdownCache } from '../../src/core/cache';
+import { disconnect } from '../../src/core/db';
+
+const testObj = {
+    _id: 1,
+    msg: 'Test message'
+};
 
 beforeEach(async () => {
     await clearCache();
@@ -15,10 +20,6 @@ test('GET - List products request', async () => {
 });
 
 test('POST - Create product', async () => {
-    const testObj = {
-        _id: 1,
-        msg: 'Test message'
-    };
     const result = await request(app).post('/').send(testObj);
     expect(result.body).toStrictEqual(
         {
@@ -32,6 +33,7 @@ test('POST - Create product', async () => {
 });
 
 test('DELETE - Delete all products', async () => {
+    await request(app).post('/').send(testObj);
     const deleteResult = await request(app).delete('/');
     expect(deleteResult.status).toEqual(200);
     const result = await request(app).get('/');

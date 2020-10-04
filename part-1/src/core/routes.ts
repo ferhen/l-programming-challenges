@@ -1,10 +1,12 @@
 import express from 'express';
+import cors from 'cors';
 
 import { listProducts, insertProducts, deleteProducts } from './controller';
 
 const router = express.Router();
 
 router.use(express.json({ limit: '200mb' }));
+router.use(cors({ origin: true }));
 
 router.get('/', async (req, res, next) => {
     try {
