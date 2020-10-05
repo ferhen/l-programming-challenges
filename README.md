@@ -21,7 +21,7 @@ Change directory to `/part-1` and execute the following commands.
 docker-compose up --build -d
 ```
 ### API test
-Run after the containers are running, run:
+After the containers are running, run:
 ```bash
 docker-compose exec part-1_api_1 npm run test
 ```
