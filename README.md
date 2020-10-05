@@ -50,6 +50,7 @@ npm install
 ```
 ### Mock API
 ```bash
+gem install sinatra
 ruby mock/url-aggregator-api.rb
 ```
 ### Run
