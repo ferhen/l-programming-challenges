@@ -44,6 +44,10 @@ The code will read from `mock/input-dump.tar.gz` and write the result to `output
 
 ## Commands
 Change directory to `/part-2` and execute the following commands.
+### Install dependencies
+```bash
+npm install
+```
 ### Mock API
 ```bash
 ruby mock/url-aggregator-api.rb
